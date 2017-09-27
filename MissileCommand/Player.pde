@@ -10,7 +10,8 @@
 class Player
 {
   PVector startingPos = new PVector(800/2,600);
-  PVector targetPos = new PVector(0,0);
+  PVector targetPos = new PVector(0,0), targetVel = new PVector(1,1);
+  PVector currentPos = new PVector(800/2,600);
   boolean clicked = false;
   PVector lerpTarget = new PVector(0,0);
   int num1 = 0;
@@ -35,16 +36,38 @@ void display()
         stroke(0,0,255);
         strokeWeight(5);
          
-        lerpTarget.x = lerp(startingPos.x, targetPos.x, num1/10.0);
+        /*lerpTarget.x = lerp(startingPos.x, targetPos.x, num1/10.0);
         lerpTarget.y = lerp(startingPos.y, targetPos.y, num2/10.0);
-        point(lerpTarget.x,lerpTarget.y);
+        point(lerpTarget.x,lerpTarget.y);*/
+        
+        line(startingPos.x, startingPos.y, currentPos.x, currentPos.y);
+        
+         
+         
+         if(currentPos.x < targetPos.x)
+         {
+           currentPos.x += targetVel.x;
+         }
+         else
+         {
+            currentPos.x = targetPos.x;
+         }
+         
+         if(currentPos.y > targetPos.y)
+         {
+           currentPos.y -= targetVel.y;
+         }
+         else
+         {
+           currentPos.y = targetPos.y;
+         }
+        
         if(num1 <10)
         {
-          
-        num1++;
-        num2++;
+          num1++;
+          num2++;
         }
-        delay(25);
+   
          
         
         

@@ -1,26 +1,27 @@
-class Enemy
+class Explosion
 {
-  PVector pos;
+
   int expandX, expandY;
-  boolean active;
+  boolean active, fired;
  
-  Enemy( )
+  Explosion()
   {
-    pos = new PVector(random(0, width), random(0, height));
+    
     expandX = 0;
     expandY = 0;
-    
+    fired = false;
    
   }
   
   void update(int num)
   {
-      if(num >= 10)
+      if(num >= 10 && fired == false)
       {
         active = true;
       }
       if(active == true)
       {
+        fired = true;
         expandX++;
         expandY++;
         if(expandX >= 100 && expandY >= 100)
@@ -29,13 +30,13 @@ class Enemy
         }
       }
   
-      else if(active == false)
+      if(active == false)
       {
         expandX = 0;
         expandY = 0;
-        pos = new PVector(random(0, width), random(0, height));
-       
+          
       }
+     
   }
   
   void display(PVector tPos)
@@ -45,10 +46,14 @@ class Enemy
      noStroke();
      fill(255,0,0);
      ellipse(tPos.x, tPos.y, expandX, expandY);
+     
    }
-   else
-   {
-       
+   else if (active == false && fired == true)
+   {   
+       clear();
+       background(255);
+       ellipse(tPos.x, tPos.y, expandX, expandY); //<>//
+     
    }
    
   }

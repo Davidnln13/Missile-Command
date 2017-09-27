@@ -7,14 +7,22 @@
 // Known bugs:
 // Programmers: Brandon Seah-Dempsey & David Nolan
 // Project: Missile Command
+
 Player p = new Player();
 int expandX = 0, expandY = 0, reset = 0;
+
 boolean active = true;
+
 int lineFullyDrawn;
-int numOfEnemies = 1;
-Enemy[] enemy = new Enemy[numOfEnemies];
+int numOfExplosion = 1;
+
+Explosion[] playerE = new Explosion[numOfExplosion];
+
 PVector sendPos = new PVector();
+
 int sendNum = 0;
+
+
 void setup()
 {
   size(800, 600);
@@ -22,22 +30,22 @@ void setup()
   smooth();
   sendPos = p.getTargetPosition();
   sendNum = p.getNumOne();
-  for(int i = 0; i < numOfEnemies; i++)
+  for(int i = 0; i < numOfExplosion; i++)
   {
-    enemy[i] = new Enemy();
+    playerE[i] = new Explosion();
   }
 }
 
 void draw()
 {
-
-  p.display(); 
+ 
+  p.display();  //<>//
   
   
-  for(int i = 0; i < numOfEnemies; i++)
+  for(int i = 0; i < numOfExplosion; i++)
   {
-    enemy[i].update(p.getNumOne());
-    enemy[i].display(p.getTargetPosition());
+    playerE[i].update(p.getNumOne());
+    playerE[i].display(p.getTargetPosition());
   }
 }
    
