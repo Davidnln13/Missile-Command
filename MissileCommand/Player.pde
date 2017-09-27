@@ -1,4 +1,5 @@
-//
+// C00204958
+// David Nolan
 // C00204076
 // Brandon Seah-Dempsey
 // Started at 11:32 22 September 2017
@@ -9,72 +10,79 @@
 //
 class Player
 {
+  //starting position of the missile
   PVector startingPos = new PVector(800/2,600);
-  PVector targetPos = new PVector(0,0), targetVel = new PVector(1,1);
-  PVector currentPos = new PVector(800/2,600);
+  //current position of the missile
+  PVector currentPos = new PVector(800/2, 600);
+  //where the missile needs to hit
+  PVector targetPos = new PVector(0,0);
+  //velocity of the missile
+  PVector missileVel = new PVector(1,1);
+  PVector distanceBetween = new PVector(0,0);
   boolean clicked = false;
-  PVector lerpTarget = new PVector(0,0);
-  int num1 = 0;
-  int num2 = 0;
+  int hit = 0;
   //
   Player()
   {
   }
-  
-  //
-  void update()
+
+void display(boolean cleared)
   {
-    
-  }
-  
-  //
-void display()
-  {
+        //<>//
     if(clicked == true)
     {
-        
+        //blue missile
         stroke(0,0,255);
         strokeWeight(5);
-         
-        /*lerpTarget.x = lerp(startingPos.x, targetPos.x, num1/10.0);
-        lerpTarget.y = lerp(startingPos.y, targetPos.y, num2/10.0);
-        point(lerpTarget.x,lerpTarget.y);*/
+        //missile line 
         
-        line(startingPos.x, startingPos.y, currentPos.x, currentPos.y);
+        if(cleared == false)
+        {
+         
+          line(startingPos.x, startingPos.y, currentPos.x, currentPos.y);
+        }
+     
         
-         
-         
          if(currentPos.x < targetPos.x)
          {
-           currentPos.x += targetVel.x;
+           distanceBetween.x = targetPos.x - currentPos.x;
+           missileVel.x = distanceBetween.x/10;
+           if(currentPos.x != targetPos.x)
+           {
+             currentPos.x += missileVel.x;
+           }
+           
+             
          }
-         else
+         else if (currentPos.x > targetPos.x)
          {
-            currentPos.x = targetPos.x;
+           distanceBetween.x = currentPos.x - targetPos.x;
+           missileVel.x = distanceBetween.x/10;
+           if(currentPos.x != targetPos.x)
+           {
+             currentPos.x -= missileVel.x;
+           }
          }
          
          if(currentPos.y > targetPos.y)
          {
-           currentPos.y -= targetVel.y;
+            distanceBetween.y = currentPos.y - targetPos.y;
          }
-         else
-         {
-           currentPos.y = targetPos.y;
-         }
-        
-        if(num1 <10)
-        {
-          num1++;
-          num2++;
-        }
-   
          
+         missileVel.y = distanceBetween.y/10;
         
-        
+         if(currentPos.y != targetPos.y)
+         {
+           currentPos.y -= missileVel.y;
+            
+         }
+                 
+         hit++;
+     
     }
 }
   
-  //
+  
   void playerMouseClicked()
   {
     if(clicked == false)
@@ -89,17 +97,16 @@ void reset()
   startingPos = new PVector(800/2,600);
   targetPos = new PVector(0,0);
   clicked = false;
-  lerpTarget = new PVector(0,0);
-  num1 = 0;
-  num2 = 0;
 }
 
-int getNumOne()
-{
-   return num1; 
-}
 PVector getTargetPosition()
 {
    return targetPos; 
 }
+int getHit()
+{
+  return hit;
+}
+ 
+  
 }

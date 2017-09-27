@@ -1,4 +1,5 @@
-//
+// C00204958
+// David Nolan
 // C00204076
 // Brandon Seah-Dempsey
 // Started at 11:26 22 September 2017
@@ -8,19 +9,12 @@
 // Programmers: Brandon Seah-Dempsey & David Nolan
 // Project: Missile Command
 
+
 Player p = new Player();
-int expandX = 0, expandY = 0, reset = 0;
-
-boolean active = true;
-
-int lineFullyDrawn;
 int numOfExplosion = 1;
+Explosion[] playerExplosion = new Explosion[numOfExplosion];
 
-Explosion[] playerE = new Explosion[numOfExplosion];
 
-PVector sendPos = new PVector();
-
-int sendNum = 0;
 
 
 void setup()
@@ -28,24 +22,24 @@ void setup()
   size(800, 600);
   background(255);
   smooth();
-  sendPos = p.getTargetPosition();
-  sendNum = p.getNumOne();
   for(int i = 0; i < numOfExplosion; i++)
   {
-    playerE[i] = new Explosion();
+    playerExplosion[i] = new Explosion();
   }
 }
 
 void draw()
 {
+  //draws the player/line
+    //<>//
  
-  p.display();  //<>//
-  
-  
   for(int i = 0; i < numOfExplosion; i++)
   {
-    playerE[i].update(p.getNumOne());
-    playerE[i].display(p.getTargetPosition());
+    //updates and draws the explosions
+    p.display(playerExplosion[i].getExplosionCleared()); 
+    playerExplosion[i].update(p.getHit());
+    playerExplosion[i].display(p.getTargetPosition());
+    
   }
 }
    

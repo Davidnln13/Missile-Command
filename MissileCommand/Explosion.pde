@@ -1,61 +1,79 @@
+// C00204958
+// David Nolan
+// C00204076
+// Brandon Seah-Dempsey
+// Started at 11:26 22 September 2017
+// Finished at
+// Time taken:
+// Known bugs:
+// Programmers: Brandon Seah-Dempsey & David Nolan
+// Project: Missile Command
+
 class Explosion
 {
 
-  int expandX, expandY;
-  boolean active, fired;
+  int diameter;
+  boolean alive, fired, explosionCleared, drawnAlready;
  
   Explosion()
   {
-    
-    expandX = 0;
-    expandY = 0;
+    diameter = 0;
+    //if the bullet is fired
     fired = false;
+    //if the explosion is on the screen
+    alive = false;
+    drawnAlready = false;
    
   }
   
-  void update(int num)
+  void update(int hit)
   {
-      if(num >= 10 && fired == false)
-      {
-        active = true;
-      }
-      if(active == true)
+      //if we "fired" the explosion its alive
+      if(hit == 10 && alive == false)
       {
         fired = true;
-        expandX++;
-        expandY++;
-        if(expandX >= 100 && expandY >= 100)
+      }
+      if(fired == true)
+      {
+        alive = true;
+      }
+      //if its alive weve already fired it and it should start increasing the diameter
+      //when it reaches max size it dies
+      if(alive == true)
+      {
+        fired = false;
+        diameter++;
+        if(diameter >= 100 )
         {
-          active = false;
+          alive = false;
         }
       }
   
-      if(active == false)
-      {
-        expandX = 0;
-        expandY = 0;
-          
-      }
-     
   }
   
   void display(PVector tPos)
   {
-   if(active == true)
+   if(alive == true)
    {
      noStroke();
      fill(255,0,0);
-     ellipse(tPos.x, tPos.y, expandX, expandY);
+     //draw explosion at the target
+     ellipse(tPos.x, tPos.y, diameter, diameter);
+     drawnAlready = true;
      
    }
-   else if (active == false && fired == true)
-   {   
+   else if (alive == false && fired == false && drawnAlready == true)
+   {   //when the missile dies clear screen
        clear();
        background(255);
-       ellipse(tPos.x, tPos.y, expandX, expandY); //<>//
-     
+       explosionCleared = true;
+       //<>//
    }
    
+  }
+  boolean getExplosionCleared()
+  {
+    return explosionCleared;
   }
   
 }
