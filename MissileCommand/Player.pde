@@ -41,6 +41,10 @@ void display(boolean cleared)
          
           line(startingPos.x, startingPos.y, currentPos.x, currentPos.y);
         }
+        if(cleared == true)
+        {
+         
+        }
      
         
          if(currentPos.x < targetPos.x)
@@ -97,6 +101,10 @@ void reset()
   startingPos = new PVector(800/2,600);
   targetPos = new PVector(0,0);
   clicked = false;
+  currentPos = new PVector(800/2, 600);
+  distanceBetween = new PVector(0,0);
+  missileVel = new PVector(1,1);
+  hit = 0;
 }
 
 PVector getTargetPosition()

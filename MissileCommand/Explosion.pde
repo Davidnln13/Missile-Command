@@ -23,7 +23,6 @@ class Explosion
     //if the explosion is on the screen
     alive = false;
     drawnAlready = false;
-   
   }
   
   void update(int hit)
@@ -67,13 +66,21 @@ class Explosion
        clear();
        background(255);
        explosionCleared = true;
-       //<>//
+        //<>//
    }
    
   }
   boolean getExplosionCleared()
   {
     return explosionCleared;
+  }
+  void reset()
+  {
+    diameter = 0;
+    fired = false;
+    alive = false;
+    drawnAlready = false;
+    explosionCleared = false;
   }
   
 }
