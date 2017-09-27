@@ -13,8 +13,8 @@ class Player
   PVector targetPos = new PVector(0,0);
   boolean clicked = false;
   PVector lerpTarget = new PVector(0,0);
-  float num1 = 0;
-  float num2 = 0;
+  int num1 = 0;
+  int num2 = 0;
   //
   Player()
   {
@@ -44,7 +44,7 @@ void display()
         num1++;
         num2++;
         }
-        delay(500);
+        delay(25);
          
         
         
@@ -70,5 +70,13 @@ void reset()
   num1 = 0;
   num2 = 0;
 }
-  
+
+int getNumOne()
+{
+   return num1; 
+}
+PVector getTargetPosition()
+{
+   return targetPos; 
+}
 }

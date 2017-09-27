@@ -3,17 +3,22 @@ class Enemy
   PVector pos;
   int expandX, expandY;
   boolean active;
-  
-  Enemy()
+ 
+  Enemy( )
   {
     pos = new PVector(random(0, width), random(0, height));
     expandX = 0;
     expandY = 0;
-    active = true;
+    
+   
   }
   
-  void update()
+  void update(int num)
   {
+      if(num >= 10)
+      {
+        active = true;
+      }
       if(active == true)
       {
         expandX++;
@@ -29,17 +34,23 @@ class Enemy
         expandX = 0;
         expandY = 0;
         pos = new PVector(random(0, width), random(0, height));
-        active = true;
+       
       }
   }
   
-  void display()
+  void display(PVector tPos)
   {
    if(active == true)
    {
-     fill(255, 0, 0);
-     ellipse(pos.x, pos.y, expandX, expandY);
+     noStroke();
+     fill(255,0,0);
+     ellipse(tPos.x, tPos.y, expandX, expandY);
    }
+   else
+   {
+       
+   }
+   
   }
   
 }
